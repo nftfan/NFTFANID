@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random String Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #1e1e1e;
+            color: #c9d1d9;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding-top: 50px;
+        }
+        .container {
+            text-align: center;
+            background: #2d2d2d;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #58a6ff;
+        }
+        .code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            background: #121212;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            word-break: break-all;
+            color: #39d353;
+        }
+        button {
+            background: #58a6ff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #1f6feb;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 22px;
+            }
+            .code {
+                font-size: 12px;
+                padding: 10px;
+            }
+            button {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>NFT Distributor Code</h1>
+        <div class="code" id="randomString">Your code will appear here</div>
+        <button onclick="generateRandomString()">Generate Code</button>
+        <button onclick="copyToClipboard()">Copy Code</button>
+    </div>
+
+    <script>
+        function generateRandomString() {
+            const prefix = 'nftfanid';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = prefix;
+            for (let i = 0; i < 24; i++) {  // 24 additional characters to make total length 32
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('randomString').textContent = result;
+        }
+
+        function copyToClipboard() {
+            const code = document.getElementById('randomString').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard');
+            }, () => {
+                alert('Failed to copy code');
+            });
+        }
+    </script>
+</body>
+</html>
