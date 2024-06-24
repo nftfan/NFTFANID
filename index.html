@@ -32,6 +32,10 @@
         .distributor-container {
             background: #3d3d3d;
         }
+        .premium-fan-container {
+            background: #4b4b4b;
+            border: 2px solid gold;
+        }
         h1 {
             font-size: 26px;
             margin-bottom: 20px;
@@ -41,6 +45,9 @@
         }
         .distributor-container h1 {
             color: #ff7f50;
+        }
+        .premium-fan-container h1 {
+            color: #ffd700;
         }
         .code {
             font-family: 'Courier New', Courier, monospace;
@@ -57,6 +64,10 @@
         .distributor-container .code {
             background: #1a1a1a;
             color: #ffcc00;
+        }
+        .premium-fan-container .code {
+            background: #2e2e2e;
+            color: #ffd700;
         }
         button {
             border: none;
@@ -80,6 +91,18 @@
         }
         .distributor-container button:hover {
             background: #e5673e;
+        }
+        .premium-fan-container button {
+            background: #ffd700;
+            color: #4b4b4b;
+        }
+        .premium-fan-container button:hover {
+            background: #e6c200;
+        }
+        .description {
+            font-size: 10px;
+            margin-top: 10px;
+            color: #ffd700;
         }
         @media (max-width: 600px) {
             h1 {
@@ -109,6 +132,16 @@
         <div class="code" id="distributorString">Your code will appear here</div>
         <button onclick="generateDistributorString()">Generate Code</button>
         <button onclick="copyDistributorCode()">Copy Code</button>
+    </div>
+
+    <div class="container premium-fan-container">
+        <h1>Premium Fan ID</h1>
+        <div class="code" id="premiumString">Your code will appear here</div>
+        <button onclick="generatePremiumString()">Generate Code</button>
+        <button onclick="copyPremiumCode()">Copy Code</button>
+        <div class="description">
+            The price to verify Premium Fan ID is 1 $MATIC paid to our official wallet: <br>0x92d550cdbc234211957bd1b579d962c885a127ba
+        </div>
     </div>
 
     <script>
@@ -149,7 +182,25 @@
                 alert('Failed to copy code');
             });
         }
+
+        function generatePremiumString() {
+            const prefix = 'premiumfanid';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = prefix;
+            for (let i = 0; i < 24; i++) {  // 24 additional characters to make total length 32
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('premiumString').textContent = result;
+        }
+
+        function copyPremiumCode() {
+            const code = document.getElementById('premiumString').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard');
+            }, () => {
+                alert('Failed to copy code');
+            });
+        }
     </script>
 </body>
 </html>
-
