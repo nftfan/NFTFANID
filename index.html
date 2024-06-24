@@ -13,37 +13,52 @@
             color: #c9d1d9;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             height: 100vh;
-            padding-top: 50px;
+            flex-direction: column;
+            gap: 20px;
         }
         .container {
             text-align: center;
-            background: #2d2d2d;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 400px;
         }
+        .nft-fan-container {
+            background: #2d2d2d;
+        }
+        .distributor-container {
+            background: #3d3d3d;
+        }
         h1 {
             font-size: 26px;
             margin-bottom: 20px;
+        }
+        .nft-fan-container h1 {
             color: #58a6ff;
+        }
+        .distributor-container h1 {
+            color: #ff7f50;
         }
         .code {
             font-family: 'Courier New', Courier, monospace;
             font-size: 14px;
-            background: #121212;
             padding: 15px;
             border-radius: 5px;
             margin: 20px 0;
             word-break: break-all;
+        }
+        .nft-fan-container .code {
+            background: #121212;
             color: #39d353;
         }
+        .distributor-container .code {
+            background: #1a1a1a;
+            color: #ffcc00;
+        }
         button {
-            background: #58a6ff;
-            color: white;
             border: none;
             padding: 12px 20px;
             font-size: 16px;
@@ -52,8 +67,19 @@
             margin: 5px;
             transition: background 0.3s ease;
         }
-        button:hover {
+        .nft-fan-container button {
+            background: #58a6ff;
+            color: white;
+        }
+        .nft-fan-container button:hover {
             background: #1f6feb;
+        }
+        .distributor-container button {
+            background: #ff7f50;
+            color: white;
+        }
+        .distributor-container button:hover {
+            background: #e5673e;
         }
         @media (max-width: 600px) {
             h1 {
@@ -71,11 +97,18 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container nft-fan-container">
         <h1>NFT FAN ID</h1>
         <div class="code" id="randomString">Your code will appear here</div>
         <button onclick="generateRandomString()">Generate Code</button>
         <button onclick="copyToClipboard()">Copy Code</button>
+    </div>
+
+    <div class="container distributor-container">
+        <h1>Distributor ID</h1>
+        <div class="code" id="distributorString">Your code will appear here</div>
+        <button onclick="generateDistributorString()">Generate Code</button>
+        <button onclick="copyDistributorCode()">Copy Code</button>
     </div>
 
     <script>
@@ -97,6 +130,26 @@
                 alert('Failed to copy code');
             });
         }
+
+        function generateDistributorString() {
+            const prefix = 'workerid';
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = prefix;
+            for (let i = 0; i < 24; i++) {  // 24 additional characters to make total length 32
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            document.getElementById('distributorString').textContent = result;
+        }
+
+        function copyDistributorCode() {
+            const code = document.getElementById('distributorString').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                alert('Code copied to clipboard');
+            }, () => {
+                alert('Failed to copy code');
+            });
+        }
     </script>
 </body>
 </html>
+
